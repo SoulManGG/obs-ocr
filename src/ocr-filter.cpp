@@ -354,6 +354,13 @@ obs_properties_t *ocr_filter_properties(void *data)
 				OBS_TEXT_DEFAULT);
 	obs_property_set_enabled(obs_properties_get(props, "current_output"), false);
 
+	// add region bounds for where the scanning actually operates on the image source
+	// 0 for width and height will assume full width and height of the source i.e. unbound ocr scanning
+	obs_properties_add_int(props, "top", obs_module_text("capture_top"), 0, 4096, 1);
+	obs_properties_add_int(props, "left", obs_module_text("capture_left"), 0, 4096, 1);
+	obs_properties_add_int(props, "width", obs_module_text("capture_width"), 0, 4096, 1);
+	obs_properties_add_int(props, "height", obs_module_text("capture_height"), 0, 4096, 1);
+
 	// Add a informative text about the plugin
 	obs_properties_add_text(
 		props, "info",
